@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class SupplierManager {
+    private List<Supplier> suppliers;
+
+    public SupplierManager() {
+        this.suppliers = new ArrayList<>();
+    }
+
+    public void addSupplier(Supplier supplier) {
+        suppliers.add(supplier);
+    }
+
+    public Supplier findSupplier(String supplierID) {
+        for (Supplier supplier : suppliers) {
+            if (supplier.getSupplierID().equals(supplierID)) {
+                return supplier;
+            }
+        }
+        return null;
+    }
+
+    public void listSuppliers() {
+        for (Supplier supplier : suppliers) {
+            System.out.println(supplier.getInfo());
+        }
+    }
+}
