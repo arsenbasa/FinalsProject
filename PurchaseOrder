@@ -1,0 +1,90 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class PurchaseOrder {
+    private String orderID;
+    private String supplierID;
+    private String orderDate;
+    private String status;
+    private List<Item> items;
+
+    public PurchaseOrder(String orderID, String supplierID, String orderDate) {
+        this.orderID = orderID;
+        this.supplierID = supplierID;
+        this.orderDate = orderDate;
+        this.status = "Pending";
+        this.items = new ArrayList<>();
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void updateStatus(String status) {
+        this.status = status;
+    }
+
+    public String getInfo() {
+        StringBuilder orderInfo = new StringBuilder(String.format("Order ID: %s, Supplier ID: %s, Date: %s, Status: %s%nItems:",
+                orderID, supplierID, orderDate, status));
+        for (Item item : items) {
+            orderInfo.append("\n  ").append(item.getInfo());
+        }
+        return orderInfo.toString();
+    }
+}
+Collapse
+PurchaseOrder.java
+2 KB
+public class Supplier {
+    private String supplierID;
+    private String name;
+    private String contactInfo;
+    private String supplierType;
+    private int rating;
+
+    public Supplier(String supplierID, String name, String contactInfo, String supplierType, int rating) {
+        this.supplierID = supplierID;
+        this.name = name;
+        this.contactInfo = contactInfo;
+        this.supplierType = supplierType;
+        this.rating = rating;
+    }
+
+    public String getSupplierID() {
+        return supplierID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public String getSupplierType() {
+        return supplierType;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getInfo() {
+        return String.format("ID: %s, Name: %s, Contact: %s, Type: %s, Rating: %d",
+                supplierID, name, contactInfo, supplierType, rating);
+    }
+}
