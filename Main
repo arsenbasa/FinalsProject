@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SupplierManagementSystem {
+public class Main {
     private static SupplierManager supplierManager = new SupplierManager();
     private static OrderManager orderManager = new OrderManager();
     private static Scanner scanner = new Scanner(System.in);
@@ -16,7 +16,6 @@ public class SupplierManagementSystem {
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
-
             switch (choice) {
                 case 1:
                     addSupplier();
@@ -67,16 +66,13 @@ public class SupplierManagementSystem {
             System.out.println("Supplier not found!");
             return;
         }
-
         System.out.print("Enter Order Date: ");
         String orderDate = scanner.nextLine();
         PurchaseOrder order = new PurchaseOrder(orderID, supplierID, orderDate);
-
         while (true) {
             System.out.print("Add item to order? (y/n): ");
             String addItem = scanner.nextLine();
             if (addItem.equalsIgnoreCase("n")) break;
-
             System.out.print("Enter Item ID: ");
             String itemID = scanner.nextLine();
             System.out.print("Enter Description: ");
@@ -86,11 +82,9 @@ public class SupplierManagementSystem {
             System.out.print("Enter Price: ");
             double price = scanner.nextDouble();
             scanner.nextLine(); // consume newline
-
-            Item item = new Item(itemID, description, quantity, price);
+            Item item = new Item(itemID, description, quantity, price);  // Using Item class
             order.addItem(item);
         }
-
         orderManager.addOrder(order);
         System.out.println("Purchase Order created successfully.");
     }
