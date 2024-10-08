@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+public class SupplierManagementSystem {
+    private static SupplierManager supplierManager = new SupplierManager();
+    private static OrderManager orderManager = new OrderManager();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n--- Supplier Management System ---");
+            System.out.println("1. Add Supplier");
+            System.out.println("2. List Suppliers");
+            System.out.println("3. Create Purchase Order");
+            System.out.println("4. List Purchase Orders");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    addSupplier();
+                    break;
+                case 2:
+                    supplierManager.listSuppliers();
+                    break;
+                case 3:
+                    createPurchaseOrder();
+                    break;
+                case 4:
+                    orderManager.listOrders();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
+    }
+
+    private static void addSupplier() {
+        System.out.print("Enter Supplier ID: ");
+        String id = scanner.nextLine();
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Contact Info: ");
+        String contact = scanner.nextLine();
+        System.out.print("Enter Supplier Type: ");
+        String type = scanner.nextLine();
+        System.out.print("Enter Rating (1-5): ");
+        int rating = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+        Supplier supplier = new Supplier(id, name, contact, type, rating);
+        supplierManager.addSupplier(supplier);
+        System.out.println("Supplier added successfully.");
+    }
+
+    private static void createPurchaseOrder() {
+        System.out.print("Enter Order ID: ");
+        String orderID = scanner.nextLine();
+        System.out.print("Enter Supplier ID: ");
+        String supplierID = scanner.nextLine();
+
+        Supplier supplier = supplierManager.findSupplier(supplierID);
+        if (supplier == null) {
+            System.out.println("Supplier not found!");
+            return;
+        }
+
+        System.out.print("Enter Order Date: ");
+        String orderDate = scanner.nextLine();
+        PurchaseOrder order = new PurchaseOrder(orderID, supplierID, orderDate);
+
+        while (true) {
+            System.out.print("Add item to order? (y/n): ");
+            String addItem = scanner.nextLine();
+            if (addItem.equalsIgnoreCase("n")) break;
+
+            System.out.print("Enter Item ID: ");
+            String itemID = scanner.nextLine();
+            System.out.print("Enter Description: ");
+            String description = scanner.nextLine();
+            System.out.print("Enter Quantity: ");
+            int quantity = scanner.nextInt();
+            System.out.print("Enter Price: ");
+            double price = scanner.nextDouble();
+            scanner.nextLine(); // consume newline
+
+            Item item = new Item(itemID, description, quantity, price);
+            order.addItem(item);
+        }
+
+        orderManager.addOrder(order);
+        System.out.println("Purchase Order created successfully.");
+    }
+}
