@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrderManager {
+    private List<PurchaseOrder> purchaseOrders;
+
+    public OrderManager() {
+        this.purchaseOrders = new ArrayList<>();
+    }
+
+    public void addOrder(PurchaseOrder order) {
+        purchaseOrders.add(order);
+    }
+
+    public PurchaseOrder findOrder(String orderID) {
+        for (PurchaseOrder order : purchaseOrders) {
+            if (order.getOrderID().equals(orderID)) {
+                return order;
+            }
+        }
+        return null;
+    }
+
+    public void listOrders() {
+        for (PurchaseOrder order : purchaseOrders) {
+            System.out.println(order.getInfo());
+        }
+    }
+}
