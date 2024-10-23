@@ -1,0 +1,44 @@
+public class ServiceSupplier implements Supplier {
+    private String supplierID;
+    private String name;
+    private String contactInfo;
+    private int rating;
+
+    public ServiceSupplier(String supplierID, String name, String contactInfo, int rating) {
+        this.supplierID = supplierID;
+        this.name = name;
+        this.contactInfo = contactInfo;
+        this.rating = rating;
+    }
+
+    @Override
+    public String getSupplierID() {
+        return supplierID;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    @Override
+    public String getSupplierType() {
+        return "Service";
+    }
+
+    @Override
+    public int getRating() {
+        return rating;
+    }
+
+    @Override
+    public String getInfo() {
+        return String.format("Service Supplier - ID: %s, Name: %s, Contact: %s, Rating: %d",
+                supplierID, name, contactInfo, rating);
+    }
+}
