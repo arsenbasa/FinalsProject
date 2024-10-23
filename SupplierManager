@@ -21,30 +21,7 @@ public class SupplierManager {
         return null;
     }
 
-    public Supplier searchByName(String name) {
-        for (Supplier supplier : suppliers){
-            if (supplier.getName().equalsIgnoreCase(name)) {
-                return supplier;
-            }
-        }
-        return null;
-    }
-    
-    public List<Supplier> filterByRating(int minRating) {
-        List<Supplier> filteredSuppliers = new ArrayList<>();
-        for (Supplier supplier : suppliers) {
-            if (supplier.getRating() >= minRating) {
-                filteredSuppliers.add(supplier);
-            }
-        }
-        return filteredSuppliers;
-    }
-
     public void listSuppliers() {
-        if (suppliers.isEmpty()) {
-            System.out.println("No suppliers available.");
-            return;
-        }
         for (Supplier supplier : suppliers) {
             System.out.println(supplier.getInfo());
         }
