@@ -1,41 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
-public class OrderManager {
-   private List<PurchaseOrder> purchaseOrders;
-   public OrderManager() {
-       this.purchaseOrders = new ArrayList<>();
-   }
-  
-   public void addOrder(PurchaseOrder order) {
-       purchaseOrders.add(order);
-   }
 
-   public PurchaseOrder findOrder(String orderID) {
-       for (PurchaseOrder order : purchaseOrders) {
-           if (order.getOrderID().equals(orderID)) {
-               return order;
-           }
-       }
-       return null;
-   }
-   
-   public List<PurchaseOrder> filterByStatus(String status) {
-       List<PurchaseOrder> filteredOrders = new ArrayList<>();
-       for (PurchaseOrder order : purchaseOrders) {
-           if (order.getStatus().equalsIgnoreCase(status)) {
-               filteredOrders.add(order);
-           }
-       }
-       return filteredOrders;
-   }
- 
-   public void listOrders() {
-       if (purchaseOrders.isEmpty()) {
-           System.out.println("No orders available.");
-           return;
-       }
-       for (PurchaseOrder order : purchaseOrders) {
-           System.out.println(order.getInfo());
-       }
-   }
+public class OrderManager {
+    private List<PurchaseOrder> purchaseOrders;
+
+    public OrderManager() {
+        this.purchaseOrders = new ArrayList<>();
+    }
+
+    public void addOrder(PurchaseOrder order) {
+        purchaseOrders.add(order);
+    }
+
+    public PurchaseOrder findOrder(String orderID) {
+        for (PurchaseOrder order : purchaseOrders) {
+            if (order.getOrderID().equals(orderID)) {
+                return order;
+            }
+        }
+        return null;
+    }
+
+    public void listOrders() {
+        for (PurchaseOrder order : purchaseOrders) {
+            System.out.println(order.getInfo());
+        }
+    }
 }
