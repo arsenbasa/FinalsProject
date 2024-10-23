@@ -1,0 +1,7 @@
+public interface Product {
+    String getItemID();
+    String getDescription();
+    int getQuantity();
+    double getPrice();
+    String getDetails();
+}
