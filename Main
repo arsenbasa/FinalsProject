@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         while (true) {
-            System.out.println("\n--- Supplier Management System ---");
+            System.out.println("\n--- A & G Supplier Management ---");
             System.out.println("1. Add Supplier");
             System.out.println("2. List Suppliers");
             System.out.println("3. Create Purchase Order");
@@ -15,7 +15,7 @@ public class Main {
             System.out.println("5. Exit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine(); 
             switch (choice) {
                 case 1:
                     addSupplier();
@@ -30,7 +30,7 @@ public class Main {
                     orderManager.listOrders();
                     break;
                 case 5:
-                    System.out.println("Exiting...");
+                    System.out.println("Thank you for using A & G Supplier Management!");
                     return;
                 default:
                     System.out.println("Invalid choice, please try again.");
@@ -45,12 +45,29 @@ public class Main {
         String name = scanner.nextLine();
         System.out.print("Enter Contact Info: ");
         String contact = scanner.nextLine();
-        System.out.print("Enter Supplier Type: ");
-        String type = scanner.nextLine();
         System.out.print("Enter Rating (1-5): ");
         int rating = scanner.nextInt();
-        scanner.nextLine(); // consume newline
-        Supplier supplier = new Supplier(id, name, contact, type, rating);
+        scanner.nextLine(); 
+
+     
+        System.out.print("Enter Supplier Type (Outsourcing/Service/Commodity): ");
+        String type = scanner.nextLine();
+
+        Supplier supplier;
+        switch (type.toLowerCase()) {
+            case "outsourcing":
+                supplier = new OutsourcingSupplier(id, name, contact, rating);
+                break;
+            case "service":
+                supplier = new ServiceSupplier(id, name, contact, rating);
+                break;
+            case "commodity":
+                supplier = new CommoditySupplier(id, name, contact, rating);
+                break;
+            default:
+                System.out.println("Invalid supplier type. Supplier not added.");
+                return;
+        }
         supplierManager.addSupplier(supplier);
         System.out.println("Supplier added successfully.");
     }
@@ -70,9 +87,10 @@ public class Main {
         String orderDate = scanner.nextLine();
         PurchaseOrder order = new PurchaseOrder(orderID, supplierID, orderDate);
         while (true) {
-            System.out.print("Add item to order? (y/n): ");
+            System.out.print("Add another item to order? (y/n): ");
             String addItem = scanner.nextLine();
             if (addItem.equalsIgnoreCase("n")) break;
+
             System.out.print("Enter Item ID: ");
             String itemID = scanner.nextLine();
             System.out.print("Enter Description: ");
@@ -81,9 +99,20 @@ public class Main {
             int quantity = scanner.nextInt();
             System.out.print("Enter Price: ");
             double price = scanner.nextDouble();
-            scanner.nextLine(); // consume newline
-            Item item = new Item(itemID, description, quantity, price);  // Using Item class
-            order.addItem(item);
+            scanner.nextLine(); 
+
+            System.out.print("Is this a perishable product? (y/n): ");
+            String isPerishable = scanner.nextLine();
+            Product product;
+
+            if (isPerishable.equalsIgnoreCase("y")) {
+                System.out.print("Enter Expiry Date: ");
+                String expiryDate = scanner.nextLine();
+                product = new PerishableProduct(itemID, description, quantity, price, expiryDate);
+            } else {
+                product = new NonPerishableProduct(itemID, description, quantity, price);
+            }
+            order.addItem(product); 
         }
         orderManager.addOrder(order);
         System.out.println("Purchase Order created successfully.");
