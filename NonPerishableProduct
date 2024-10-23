@@ -1,0 +1,39 @@
+public class NonPerishableProduct implements Product {
+    private String itemID;
+    private String description;
+    private int quantity;
+    private double price;
+
+    public NonPerishableProduct(String itemID, String description, int quantity, double price) {
+        this.itemID = itemID;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    @Override
+    public String getItemID() {
+        return itemID;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public int getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String getDetails() {
+        return String.format("Non-Perishable Product ID: %s, Description: %s, Quantity: %d, Price: %.2f",
+                itemID, description, quantity, price);
+    }
+}
