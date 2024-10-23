@@ -6,7 +6,7 @@ public class PurchaseOrder {
     private String supplierID;
     private String orderDate;
     private String status;
-    private List<Item> items;
+    private List<Product> items; 
 
     public PurchaseOrder(String orderID, String supplierID, String orderDate) {
         this.orderID = orderID;
@@ -20,7 +20,7 @@ public class PurchaseOrder {
         return orderID;
     }
 
-    public void addItem(Item item) {
+    public void addItem(Product item) { 
         items.add(item);
     }
 
@@ -31,8 +31,8 @@ public class PurchaseOrder {
     public String getInfo() {
         StringBuilder orderInfo = new StringBuilder(String.format("Order ID: %s, Supplier ID: %s, Date: %s, Status: %s%nItems:",
                 orderID, supplierID, orderDate, status));
-        for (Item item : items) {
-            orderInfo.append("\n  ").append(item.getInfo());
+        for (Product item : items) { 
+            orderInfo.append("\n  ").append(item.getDetails());
         }
         return orderInfo.toString();
     }
