@@ -1,0 +1,41 @@
+public class PerishableProduct implements Product {
+    private String itemID;
+    private String description;
+    private int quantity;
+    private double price;
+    private String expiryDate; 
+    
+    public PerishableProduct(String itemID, String description, int quantity, double price, String expiryDate) {
+        this.itemID = itemID;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.expiryDate = expiryDate;
+    }
+
+    @Override
+    public String getItemID() {
+        return itemID;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public int getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String getDetails() {
+        return String.format("Perishable Product ID: %s, Description: %s, Quantity: %d, Price: %.2f, Expiry Date: %s",
+                itemID, description, quantity, price, expiryDate);
+    }
+}
